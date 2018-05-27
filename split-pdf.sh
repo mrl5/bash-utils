@@ -2,13 +2,15 @@
 # Copyright 2018 Jakub Kołodziejczak
 # Distributed under the terms of the GNU General Public License v3
 
-# Creates new pdf from partf of another pdf
-
+# Creates new pdf from part of another pdf
+#
 # $1: input file
 # $2: output file
 # $3: first range
 # $4: second range
 # $n-2: nth range
+#
+# Example: sh split-pdf.sh /path/to/input.pdf /path/to/output.pdf 1-1 6-9 18-30
 
 index=1
 tmpname="temp-pdf-snapshot"
