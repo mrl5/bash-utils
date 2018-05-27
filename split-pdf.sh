@@ -2,6 +2,8 @@
 # Copyright 2018 Jakub Kołodziejczak
 # Distributed under the terms of the GNU General Public License v3
 
+# Creates new pdf from partf of another pdf
+
 # $1: input file
 # $2: output file
 # $3: first range
