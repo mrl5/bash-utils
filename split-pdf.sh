@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2018 Jakub Kołodziejczak
+# Copyright 2018 mrl5
 # Distributed under the terms of the GNU General Public License v3
 
 # Creates new pdf from part of another pdf
