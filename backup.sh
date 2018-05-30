@@ -11,10 +11,11 @@ BACKUPFAILMSG="Operation failed. Aborting."
 
 # todo
 ## if $2 and $3 not given then ...
+## exclude files defined in ...
 
 echo "Creating backup..."
 cd $BACKUPTARGET
-tar --exclude=new-cls.git -jcvf $BACKUPPRIMARYDIR/$BACKUPARCHIVE *
+tar -jcvf $BACKUPPRIMARYDIR/$BACKUPARCHIVE *
 #$? success flag of last operation (0 = success; other = fail)
 if [ $? -eq 0 ]; then
     echo "Created" $BACKUPARCHIVE "in" $BACKUPPRIMARYDIR
