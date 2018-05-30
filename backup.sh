@@ -5,12 +5,9 @@
 STARTDIR=$(pwd -P)
 BACKUPTARGET=$1
 BACKUPARCHIVE=$(basename $BACKUPTARGET)-$(date +%Y%m%d).tar.bz2
-# "$(dirname $0)" - script location
-cd $(dirname $0)/GitRepositories-mail
 BACKUPPRIMARYDIR=$2
 BACKUPREDUNDANTDIR=$3
 BACKUPFAILMSG="Operation failed. Aborting."
-STARTDIR=$(pwd)
 
 # todo
 ## if $2 and $3 not given then ...
