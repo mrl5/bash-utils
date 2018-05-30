@@ -12,6 +12,7 @@ BACKUPFAILMSG="Operation failed. Aborting."
 # todo
 ## if $2 and $3 not given then ...
 ## exclude files defined in ...
+## add colors
 
 echo "Creating backup..."
 cd $BACKUPTARGET
