@@ -2,33 +2,28 @@
 # Copyright 2018 mrl5
 # Distributed under the terms of the GNU General Public License v3
 
+# Example 1: 'sh backup.sh /path/to/target' (creates backup.tar.bz2 in current directory)
+# Example 2: 'sh backup.sh /path/to/target /path/to/backup/directory' (creates backup.tar.bz2 in given directory)
+
 STARTDIR=$(pwd -P)
 BACKUPTARGET=$1
 BACKUPARCHIVE=$(basename $BACKUPTARGET)-$(date +%Y%m%d).tar.bz2
-BACKUPPRIMARYDIR=$2
-BACKUPREDUNDANTDIR=$3
 BACKUPFAILMSG="Operation failed. Aborting."
 
-# todo
-## if $2 and $3 not given then ...
-## exclude files defined in ...
-## add colors
+#if length of $2 is zero
+if [ -z $2 ]; then
+  BACKUPDIR=$STARTDIR
+else
+  BACKUPDIR=$2
+fi
 
 echo "Creating backup..."
 cd $BACKUPTARGET
-tar -jcvf $BACKUPPRIMARYDIR/$BACKUPARCHIVE *
+tar -jcvf $BACKUPDIR/$BACKUPARCHIVE *
 #$? success flag of last operation (0 = success; other = fail)
 if [ $? -eq 0 ]; then
-    echo "Created" $BACKUPARCHIVE "in" $BACKUPPRIMARYDIR
-    cd $BACKUPPRIMARYDIR
-    echo "Copying backup to another directory..."
-    cp -v $BACKUPARCHIVE $BACKUPREDUNDANTDIR
-    if [ $? -eq 0 ]; then
-        echo "Copied" $BACKUPARCHIVE to $BACKUPREDUNDANTDIR
-    else
-        echo $BACKUPFAILMSG
-    fi
+  echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
 else
-    echo $BACKUPFAILMSG
+  echo $BACKUPFAILMSG
 fi
 cd $STARTDIR
