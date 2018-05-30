@@ -16,7 +16,7 @@ index=1
 tmpname="temp-pdf-snapshot"
 tmpdir="/tmp/temp-pdf-snapshots"
 
-### get output dir from /path/to/outputfile.pdf
+### get directory of /path/to/outputfile.pdf file
 OUTPUTDIR=${2%/*}
 
 if [ $OUTPUTDIR == $2 ]
