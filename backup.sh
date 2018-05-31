@@ -14,34 +14,34 @@ BACKUPFAILMSG="Operation failed. Aborting."
 
 #if directory starts with (only one) "." then rename archive
 if [[ $(basename $BACKUPTARGET) =~ ^\.[^.]. ]]; then
-  PARTIALNAME=$(basename $BACKUPTARGET | cut -d'.' -f2-)
+    PARTIALNAME=$(basename $BACKUPTARGET | cut -d'.' -f2-)
 else
-  PARTIALNAME=$(basename $BACKUPTARGET)
+    PARTIALNAME=$(basename $BACKUPTARGET)
 fi
 
 BACKUPARCHIVE=$PARTIALNAME-$(date +%Y%m%d).tar.bz2
 
 #if length of $2 is zero
 if [ -z $2 ]; then
-  BACKUPDIR=$STARTDIR
+    BACKUPDIR=$STARTDIR
 else
-  BACKUPDIR=$2
+    BACKUPDIR=$2
 fi
 
 cd $BACKUPTARGET
 
 # check if $BACKUPTARGET is a directory
 if [ $? -eq 0 ]; then
-  echo "Creating backup..."
-  tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
-  # "$?" = success flag of last operation (0 = success; other = fail)
-  if [ $? -eq 0 ]; then
-    echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
+    echo "Creating backup..."
+    tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
+    # "$?" = success flag of last operation (0 = success; other = fail)
+    if [ $? -eq 0 ]; then
+      echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
+    else
+      echo $BACKUPFAILMSG
+    fi
   else
     echo $BACKUPFAILMSG
-  fi
-else
-  echo $BACKUPFAILMSG
 fi
 
 cd $STARTDIR
