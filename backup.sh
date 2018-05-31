@@ -2,7 +2,7 @@
 # Copyright 2018 mrl5
 # Distributed under the terms of the GNU General Public License v3
 
-# This script creates backup of content of given directory
+# This script creates backup of given directory content
 # Example 1: 'sh backup.sh /path/to/target/directory'
 #  creates "directory-YYMMDD.tar.bz2" archive in current directory
 # Example 2: 'sh backup.sh /path/to/target/directory /path/to/backup/directory'
@@ -12,7 +12,7 @@ BACKUPTARGET=$1
 STARTDIR=$(pwd -P)
 BACKUPFAILMSG="Operation failed. Aborting."
 
-#if directory starts with only one "." rename archive
+#if directory starts with (only one) "." then rename archive
 if [[ $(basename $BACKUPTARGET) =~ ^\.[^.]. ]]; then
   PARTIALNAME=$(basename $BACKUPTARGET | cut -d'.' -f2-)
 else
@@ -30,11 +30,11 @@ fi
 
 cd $BACKUPTARGET
 
-#check if BACKUPTARGET is a directory
+# check if $BACKUPTARGET is a directory
 if [ $? -eq 0 ]; then
   echo "Creating backup..."
   tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
-  #$? success flag of last operation (0 = success; other = fail)
+  # "$?" = success flag of last operation (0 = success; other = fail)
   if [ $? -eq 0 ]; then
     echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
   else
