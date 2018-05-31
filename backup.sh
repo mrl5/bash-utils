@@ -8,11 +8,11 @@
 # Example 2: 'sh backup.sh /path/to/target/directory /path/to/backup/directory'
 #  creates "directory-YYMMDD.tar.bz2" archive in given backup directory
 
-STARTDIR=$(pwd -P)
 BACKUPTARGET=$1
+STARTDIR=$(pwd -P)
 BACKUPFAILMSG="Operation failed. Aborting."
 
-#if directory starts with only one "." ...
+#if directory starts with only one "." rename archive
 if [[ $(basename $BACKUPTARGET) =~ ^\.[^.]. ]]; then
   PARTIALNAME=$(basename $BACKUPTARGET | cut -d'.' -f2-)
 else
@@ -28,13 +28,20 @@ else
   BACKUPDIR=$2
 fi
 
-echo "Creating backup..."
 cd $BACKUPTARGET
-tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
-#$? success flag of last operation (0 = success; other = fail)
+
+#check if BACKUPTARGET is a directory
 if [ $? -eq 0 ]; then
-  echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
+  echo "Creating backup..."
+  tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
+  #$? success flag of last operation (0 = success; other = fail)
+  if [ $? -eq 0 ]; then
+    echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
+  else
+    echo $BACKUPFAILMSG
+  fi
 else
   echo $BACKUPFAILMSG
 fi
+
 cd $STARTDIR
