@@ -34,7 +34,10 @@ cd $BACKUPTARGET
 # "$?" = success flag of last operation (0 = success; other = fail)
 if [ $? -eq 0 ]; then
     echo "Creating backup..."
+
+    # 'tar -jcvf' =  use bzip2 compression
     tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
+
     if [ $? -eq 0 ]; then
       echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
     else

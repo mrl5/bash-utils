@@ -27,13 +27,20 @@ fi
 
 mkdir $TMPDIR
 
+# start loop from 3rd argument
 for RANGE in ${@:3}
 do
     START=$(echo $RANGE | cut -d'-' -f1)
     END=$(echo $RANGE | cut -d'-' -f2)
+
+    # create new pdf from range $START-$END
+    #'$(printf "%04g" $INDEX)' = padding $INDEX with leading zeros
     gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=$START -dLastPage=$END -sOutputFile=$TMPDIR/$TMPNAME-$(printf "%04g" $INDEX).pdf "$1"
+
     ((INDEX++))
 done
 
+# merge all 'temp-pdf-snapshot' files into one output.pdf
 gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE="$2" -dBATCH $TMPDIR/$TMPNAME*.pdf
+
 rm -rf $TMPDIR
