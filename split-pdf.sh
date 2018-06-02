@@ -31,7 +31,7 @@ for RANGE in ${@:3}
 do
     START=$(echo $RANGE | cut -d'-' -f1)
     END=$(echo $RANGE | cut -d'-' -f2)
-    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=$START -dLastPage=$END -sOutputFile=$TMPDIR/$TMPNAME-$INDEX.pdf $1
+    gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=$START -dLastPage=$END -sOutputFile=$TMPDIR/$TMPNAME-$(printf "%04g" $INDEX).pdf $1
     ((INDEX++))
 done
 
