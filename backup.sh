@@ -31,10 +31,10 @@ fi
 cd $BACKUPTARGET
 
 # check if $BACKUPTARGET is a directory
+# "$?" = success flag of last operation (0 = success; other = fail)
 if [ $? -eq 0 ]; then
     echo "Creating backup..."
     tar -jcvf $BACKUPDIR/$BACKUPARCHIVE .
-    # "$?" = success flag of last operation (0 = success; other = fail)
     if [ $? -eq 0 ]; then
       echo "Created" $BACKUPARCHIVE "in" $BACKUPDIR
     else
