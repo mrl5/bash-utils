@@ -1,0 +1,3 @@
+[submodule "pdf-utils"]
+	path = pdf-utils
+	url = git@github.com:mrl5/pdf-utils.git
